@@ -1,0 +1,13 @@
+// Import the two phone screens
+import Main from './components/Main';
+import Chat from './components/Chat';
+// Import React Navigation
+import { createStackNavigator } from 'react-navigation'
+
+// Create the stack navigator for users to navigate the two screens
+const navigator = createStackNavigator({
+  Main: { screen: Main },
+  Chat: { screen: Chat },
+});
+
+export default navigator
