@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -8,8 +8,17 @@ import {
 } from 'react-native';
 
 class Main extends React.Component {
-  state = { name: '' } // The component's state, this will be the name value
+  static navigationOptions = {
+    title: 'PenPal',
+  };
+
+  // The component's state, this will be the user's name
+  state = {
+    name: ''
+  }
+
   onChangeText = name => this.setState({ name }); // Create listener and updates when user takes an action
+
   // This links to the button, which takes the user to the next page, carrying the state (name)
   onPress = () => {
     this.props.navigation.navigate('Chat', { name: this.state.name });
@@ -23,9 +32,9 @@ class Main extends React.Component {
 
         // This is where user enters their name and register as an anonymous user
         <TextInput
-          onChangeText={this.onChangeText} // listener
           style={styles.nameInput}
           placeHolder="Alex Facebook"
+          onChangeText={this.onChangeText} // listener
           value={this.state.name}
         />
 
