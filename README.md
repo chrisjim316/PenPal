@@ -23,7 +23,7 @@ sudo npm install -g expo-cli && sudo npm install
 ```
 expo start
 ```
-5. Click 's' on your keyboard on the command line to sign in expo using the credentials below
+5. Click 's' on your keyboard on the command line, click the arrow down key until you are hovering above 'Log in with an existing Expo account' and click enter. Sign in expo using the credentials below
 ```
 Username: chrisjim316
 Password: m0vefast
@@ -31,10 +31,8 @@ Password: m0vefast
 
 5. Click 'i' on your keyboard on the command line to launch ios simulator
 
-6. Click 'Back to Expo Home'
+6. Click 'Back to Expo Home'. If not signed in yet, use the credentials above
 
-7. If not signed in yet, use the credentials above
-
-8. Click 'projects' and click 'PenPal (@chrisjim316)'
+7. Click 'projects' and click 'PenPal (@chrisjim316)'
 
 Well done in setting it up! Have fun 🎉
