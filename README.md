@@ -14,9 +14,9 @@
 git clone https://github.com/chrisjim316/PenPal/ && cd PenPal
 ```
 
-3. Install all libraries and tools required for the project by running this on the command line 
+3. Install all libraries and tools required for the project by running this on the command line
 ```
-brew install watchman && sudo npm install -g expo-cli && npm install
+sudo npm install -g expo-cli && sudo npm install
 ```
 
 4. To run the iOS application, use the following command:
@@ -38,4 +38,3 @@ Password: m0vefast
 8. Click 'projects' and click 'PenPal (@chrisjim316)'
 
 Well done in setting it up! Have fun 🎉
-
