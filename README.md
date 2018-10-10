@@ -23,10 +23,17 @@ brew install watchman && sudo npm install -g expo-cli && npm install
 ```
 expo start
 ```
-5. Click 'i' on your keyboard to launch ios simulator
-
-Credentials for expo.io 
+5. Click 's' on your keyboard on the command line to sign in expo using the credentials below
 ```
 Username: chrisjim316
 Password: m0vefast
 ```
+
+5. Click 'i' on your keyboard on the command line to launch ios simulator
+
+6. Click 'Back to Expo Home'
+
+7. If not signed in yet, use the credentials above
+
+8. Click 'projects' and click 'PenPal (@chrisjim316)'
+
