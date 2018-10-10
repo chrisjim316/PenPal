@@ -4,10 +4,10 @@ about: Suggest an idea for this project
 
 ---
 
-## PROBLEM 🔍
+## EXPLAIN THE ISSUE IN A FEW SENTENCES 🔍
 
-## WHY THIS ISSUE 🤔
+## WHY THIS FEATURE 🤔
 
 ## PARTS OF CODEBASE AFFECTED 🕹️ (can be high level) 
 
-## ANY LINKS OR EXTRA INFO 💎
+## ANY LINKS OR HELPFUL INFO 💎
