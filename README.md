@@ -1,6 +1,6 @@
-# **PenPal**
+# **PenPal** 🌇
 ## An instant translation platform for people to learn new languages and mingle
-## [LIVE DEMO](https://snack.expo.io/@chrisjim316/penpal) - [LICENSE](https://github.com/chrisjim316/PenPal/blob/master/LICENSE)
+## [LIVE DEMO](https://snack.expo.io/@chrisjim316/penpal) 📱 - [LICENSE](https://github.com/chrisjim316/PenPal/blob/master/LICENSE) 📝
 
 ## Notes
 * Works on both android and ios, but for simplicity just run it on ios
