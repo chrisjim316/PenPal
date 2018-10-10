@@ -1,5 +1,5 @@
 # **PenPal** 🌇
-## An instant translation platform for people to learn new languages and mingle
+## An instant translation app that connects communities together by making learning new languages fun and engaging
 ## [LIVE DEMO](https://snack.expo.io/@chrisjim316/penpal) 📱 - [LICENSE](https://github.com/chrisjim316/PenPal/blob/master/LICENSE) 📝
 
 ## Notes
