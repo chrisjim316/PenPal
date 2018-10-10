@@ -1,29 +1,32 @@
 # **PenPal**
 ## An instant translation platform for people to learn new languages and mingle
-## [LIVE DEMO]() - [LICENSE](https://github.com/chrisjim316/PenPal/blob/master/LICENSE)
+## [LIVE DEMO](https://snack.expo.io/@chrisjim316/penpal) - [LICENSE](https://github.com/chrisjim316/PenPal/blob/master/LICENSE)
 
-## Prerequisites
-* Xcode installed
-* Android Development Studio (later on)
+## Notes
+* Works on both android and ios, but for simplicity just run it on ios
 
 ## Instructions
 
-First, make sure you have downloaded react-native
+1. Install XCode if you haven't already via the [Apple App Store](https://itunes.apple.com/app/xcode/id497799835)
+
+2. Clone the repo
 ```
-npm install -g react-native-cli
-```
-Then, install all other libraries required for the project by running this single command
-```
-npm install
+git clone https://github.com/chrisjim316/PenPal/
 ```
 
+3. Install all libraries and tools required for the project by running this on the command line 
+```
+brew install watchman && sudo npm install -g expo-cli && npm install
+```
 
-To run the iOS application, use the following command:
+4. To run the iOS application, use the following command:
 ```
-react-native run-ios
+expo start
 ```
+5. Click 'i' on your keyboard to launch ios simulator
 
-To run the Android application, use this command: (later on)
+Credentials for expo.io 
 ```
-react-native run-android
+Username: chrisjim316
+Password: m0vefast
 ```
