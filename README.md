@@ -9,9 +9,9 @@
 
 1. Install XCode if you haven't already via the [Apple App Store](https://itunes.apple.com/app/xcode/id497799835)
 
-2. Clone the repo
+2. Clone the repo and cd into it
 ```
-git clone https://github.com/chrisjim316/PenPal/
+git clone https://github.com/chrisjim316/PenPal/ && cd PenPal
 ```
 
 3. Install all libraries and tools required for the project by running this on the command line 
