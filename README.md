@@ -1,11 +1,11 @@
 # **PenPal** 🌇
-## An instant translation app that connects communities together by making learning new languages fun and engaging
-## [LIVE DEMO](https://snack.expo.io/@chrisjim316/penpal) 📱 - [LICENSE](https://github.com/chrisjim316/PenPal/blob/master/LICENSE) 📝
+### An instant translation app that connects communities together by making learning new languages fun and engaging
+### [LIVE DEMO](https://snack.expo.io/@chrisjim316/penpal) 📱 - [LICENSE](https://github.com/chrisjim316/PenPal/blob/master/LICENSE) 📝
 
 ## Notes
 * Works on both android and ios, but for simplicity just run it on ios
 
-## Instructions
+## Instructions (8 steps)
 
 1. Install XCode if you haven't already via the [Apple App Store](https://itunes.apple.com/app/xcode/id497799835)
 
@@ -29,10 +29,10 @@ Username: chrisjim316
 Password: m0vefast
 ```
 
-5. Click 'i' on your keyboard on the command line to launch ios simulator
+6. Click 'i' on your keyboard on the command line to launch ios simulator
 
-6. Click 'Back to Expo Home'. If not signed in yet, use the credentials above
+7. Click 'Back to Expo Home'. If not signed in yet, use the credentials above
 
-7. Click 'projects' and click 'PenPal (@chrisjim316)'
+8. Click 'projects' and click 'PenPal (@chrisjim316)'
 
 Well done in setting it up! Have fun 🎉
