@@ -7,15 +7,25 @@ class Fire {
   }
 
   // Credentials from my firebase account
-  init = () =>
-    firebase.initializeApp({
-      apiKey: "AIzaSyAdkQuNxg6Gav-3__-PEVHi49i8rB9sV4E",
-      authDomain: "penpal-906f0.firebaseapp.com",
-      databaseURL: "https://penpal-906f0.firebaseio.com",
-      projectId: "penpal-906f0",
-      storageBucket: "penpal-906f0.appspot.com",
-      messagingSenderId: "750457223745"
-    });
+  init = () => {
+    try {
+      firebase.initializeApp({
+        apiKey: "AIzaSyAdkQuNxg6Gav-3__-PEVHi49i8rB9sV4E",
+        authDomain: "penpal-906f0.firebaseapp.com",
+        databaseURL: "https://penpal-906f0.firebaseio.com",
+        projectId: "penpal-906f0",
+        storageBucket: "penpal-906f0.appspot.com",
+        messagingSenderId: "750457223745",
+      });
+    } catch (error) {
+      // Skip 'app already exists' error when hot-reloading
+      if(error.message.includes('already exists')) {
+        console.error('Firebase initialization error', error.stack);
+      }
+    }
+  }
+
+
 
   observeAuth = () =>
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
