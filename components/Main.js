@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native'
 import {
   View,
   StyleSheet,
@@ -10,6 +11,9 @@ import {
 class Main extends React.Component {
   static navigationOptions = {
     title: 'PenPal',
+    headerStyle: {
+      backgroundColor: '#e8eef7'
+    },
   };
 
   // The component's state, this will be the user's name
@@ -26,7 +30,12 @@ class Main extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style = {styles.MainContainer}>
+        <Image
+          style = {styles.ImageStyling}
+          source={{uri: 'https://cdn2.iconfinder.com/data/icons/lineicon-essential/512/Significon-Translation-512.png'}}
+        />
+
         // Prompts user to enter their name
         <Text style={styles.title}>Enter your name:</Text>
 
@@ -50,6 +59,18 @@ class Main extends React.Component {
 // Make everything neat and pretty
 const offset = 24;
 const styles = StyleSheet.create({
+  ImageStyling: {
+    marginLeft: 120,
+    width: 150,
+    height: 150,
+  },
+  MainContainer: {
+    flex: 1,
+    // Set content's vertical alignment.
+    justifyContent: 'center',
+    // Set hex color code here.
+    backgroundColor: '#afceff',
+  },
   nameInput: {
     height: offset * 2,
     margin: offset,
