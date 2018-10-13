@@ -1,5 +1,5 @@
 # **PenPal** 🌇
-### A translation app that connects communities together by making learning new languages meaningful with flashcards and conversation starters, built using `_*REACT NATIVE*_`, `_*NODEJS*_` & `_*FIREBASE*_`
+### A translation app that connects communities together by making learning new languages meaningful with flashcards and conversation starters, built using `REACT NATIVE`, `NODEJS` & `FIREBASE`
 ### [LIVE DEMO](https://snack.expo.io/@chrisjim316/penpal) 📱 - [LICENSE](https://github.com/chrisjim316/PenPal/blob/master/LICENSE) 📝
 
 ## Notes
