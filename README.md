@@ -1,4 +1,4 @@
-# **PenPal** 🌇Built using react native, NodeJS, and Firebase
+# **PenPal** 🌇### Built using react native, NodeJS, and Firebase
 ### A translation app that connects communities together by making learning new languages meaningful with flashcards and conversation starters
 ### [LIVE DEMO](https://snack.expo.io/@chrisjim316/penpal) 📱 - [LICENSE](https://github.com/chrisjim316/PenPal/blob/master/LICENSE) 📝
 
