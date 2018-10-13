@@ -33,6 +33,8 @@ Password: m0vefast
 
 7. Click 'Back to Expo Home'. If not signed in yet, use the credentials above
 
-8. Click 'projects' and click 'PenPal (@chrisjim316)'
+8. If you see nothing under 'recently in developments' and 'recently opened' open and sign in into https://snack.expo.io/@chrisjim316/penpal on a web browser, click PenPal under 'Snacks'.
+
+9. Check your iOS simulator again, click 'PenPal (@chrisjim316). Should work!
 
 Well done in setting it up! Have fun 🎉
