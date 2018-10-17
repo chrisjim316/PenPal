@@ -26,7 +26,7 @@ expo start
 5. Click 's' on your keyboard on the command line, click the arrow down key until you are hovering above 'Log in with an existing Expo account' and click enter. Sign in expo using the credentials below
 ```
 Username: chrisjim316
-Password: m0vefast
+Password: you know it ;)
 ```
 
 6. Click 'i' on your keyboard on the command line to launch ios simulator
