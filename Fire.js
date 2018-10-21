@@ -1,6 +1,11 @@
 import firebase from 'firebase';
+import { PowerTranslator, ProviderTypes, TranslatorConfiguration, TranslatorFactory } from 'react-native-power-translator';
+// import translate from 'google-translate-api';
+const API_KEY = 'AIzaSyClnfcFWOuOg_DfiqlY3-Hvb0t7Q3DiIYw'
+let language = 'fr';
 
 class Fire {
+
   constructor() {
     this.init();
     this.observeAuth();
@@ -20,12 +25,11 @@ class Fire {
     } catch (error) {
       // Skip 'app already exists' error when hot-reloading
       if(error.message.includes('already exists')) {
-        console.error('Firebase initialization error', error.stack);
+        console.error('Firebase initialization error, can be ignored.');
+        //error.stack if you have detailed results
       }
     }
   }
-
-
 
   observeAuth = () =>
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
@@ -51,23 +55,28 @@ class Fire {
     return firebase.database().ref('messages');
   }
 
+  // This takes care of all the messages currently stored in the database
+  // Manually changing text for example, will change all text
   parse = snapshot => {
-    const { timestamp: numberStamp, text, user } = snapshot.val();
+    let { timestamp: numberStamp, text, user } = snapshot.val();
     const { key: _id } = snapshot;
     const timestamp = new Date(numberStamp);
-    const message = {
+
+    let message = {
       _id,
       timestamp,
       text,
       user,
     };
+
     return message;
   }
 
-  // Subsribes to the database, Gets last 20 messages and subscribes to every new message then parse it
+  // Callback prop that calls our messages ref
+  // Subsribes to the database, Gets last 100 messages and subscribes to every new message then parse it
   on = callback =>
     this.ref
-      .limitToLast(20)
+      .limitToLast(100)
       .on('child_added', snapshot => callback(this.parse(snapshot)));
 
   // Get accurate timestamp
@@ -75,18 +84,66 @@ class Fire {
     return firebase.database.ServerValue.TIMESTAMP;
   }
 
+  // This only takes care of the current message being sent
   // Sends the message to the Backend
-  send = messages => {
+  send = (messages) => {
+    TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
+
     for (let i = 0; i < messages.length; i++) {
-      const { text, user } = messages[i];
-      const message = {
-        text,
-        user,
-        timestamp: this.timestamp,
-      };
-      this.append(message);
+      let { text, user } = messages[i];
+
+      // Sets language based on user sign up language preferences
+      if(user.language.trim() == "Spanish") {
+        language = 'es';
+        console.log("Language has been changed to " + language);
+        TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
+      } else if(user.language.trim() == "English") {
+        language = 'en';
+        console.log("Language has been changed to " + language);
+        TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
+      } else if(user.language.trim() == "French") {
+        language = 'fr';
+        console.log("Language has been changed to " + language);
+        TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
+      } else if(user.language.trim() == "Chinese") {
+        language = 'zh-TW';
+        console.log("Language has been changed to " + language);
+        TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
+      } else if(user.language.trim() == "Japanese") {
+        language = 'ja';
+        console.log("Language has been changed to " + language);
+        TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
+      }
+
+      const translator = TranslatorFactory.createTranslator();
+      translator.translate(text).then(translated => {
+          console.log("original text: " + text);
+          text = translated;
+          console.log("translated: " + text);
+
+          const message = {
+            text,
+            user,
+            timestamp: this.timestamp,
+          };
+
+          this.append(message);
+      });
     }
   };
+
+  // translateMessage = (message, language) => {
+  //   translate(message, {to: language}).then(res => {
+  //     console.log(res.text);
+  //     //=> I speak English
+  //     console.log(res.from.language.iso);
+  //     //=> nl
+  //     return res.text;
+  //   }).catch(err => {
+  //     console.error(err);
+  //   });
+  // };
+  // let translatedText = this.translateMessage(message.text, language);
 
   append = message => this.ref.push(message);
 

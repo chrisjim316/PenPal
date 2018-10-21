@@ -8,11 +8,9 @@ type Props = {
 };
 
 class Chat extends React.Component<Props> {
-
-  // Set the title of the screen to either the state.params.name or a default value
+  // Set the title of the screen to either the state.params.language or a default welcome message
   static navigationOptions = ({ navigation }) => ({
-    title: 'Welcome to PenPal!',
-    // (navigation.state.params || {}).name ||
+    title: (navigation.state.params.language + ' Chat') || 'Welcome to PenPal!',
   });
 
   state = {
@@ -21,10 +19,11 @@ class Chat extends React.Component<Props> {
 
   // Chat bubbles!
   get user() {
-  // Return our name and our UID for GiftedChat to parse in order to create correct chatBubbles
+    // Return our name and our UID for GiftedChat to parse in order to create correct chatBubbles
     return {
       name: this.props.navigation.state.params.name,
       _id: Fire.shared.uid,
+      language: this.props.navigation.state.params.language,
     };
   }
 
@@ -39,13 +38,14 @@ class Chat extends React.Component<Props> {
     );
   }
 
+  // message is the response from on method in Fire.js
   // Connects to Firebase server and script
-  // Subsribe
+  // Subscribe
   componentDidMount() {
     Fire.shared.on(message =>
       this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, message),
-      }))
+      })),
     );
   }
 
@@ -53,7 +53,6 @@ class Chat extends React.Component<Props> {
   componentWillUnmount() {
     Fire.shared.off();
   }
-
 
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image } from 'react-native'
+import { Button } from 'react-native-elements';
 import {
+  Image,
   View,
   StyleSheet,
   Text,
@@ -10,22 +11,24 @@ import {
 
 class Main extends React.Component {
   static navigationOptions = {
-    title: 'PenPal',
+    title: 'PenPal - Your Translation Buddy',
     headerStyle: {
-      backgroundColor: '#e8eef7'
+      backgroundColor: '#BDD8FF',
     },
   };
 
   // The component's state, this will be the user's name
   state = {
-    name: ''
+    name: '',
+    language: ''
   }
 
+  onChangeLanguage = language => this.setState({ language }); // Create listener for language preference selections
   onChangeText = name => this.setState({ name }); // Create listener and updates when user takes an action
 
   // This links to the button, which takes the user to the next page, carrying the state (name)
   onPress = () => {
-    this.props.navigation.navigate('Chat', { name: this.state.name });
+    this.props.navigation.navigate('Chat', { name: this.state.name, language: this.state.language });
   }
 
   render() {
@@ -41,15 +44,23 @@ class Main extends React.Component {
 
         // This is where user enters their name and register as an anonymous user
         <TextInput
-          style={styles.nameInput}
+          style={styles.inputBox}
           placeHolder="Alex Facebook"
           onChangeText={this.onChangeText} // listener
           value={this.state.name}
         />
 
+        <Text style={styles.title}>Enter you preferred language:(Spanish, English, French, Chinese, Japanese), Arjun make the entire dropdown list and include every country</Text>
+        <TextInput
+          style={styles.inputBox}
+          placeHolder="Spanish"
+          onChangeText={this.onChangeLanguage} // listener
+          value={this.state.language}
+        />
+
         // Button to continue to next screen (chat)
         <TouchableOpacity onPress={this.onPress}>
-          <Text style={styles.buttonText}>Next</Text>
+          <Button onPress={this.onPress} style={styles.ButtonStyling} borderRadius='20' backgroundColor="#97C1FF" color="#000000" fontWeight='bold' title='START CHATTING FOR FREE NOW'/>
         </TouchableOpacity>
       </View>
     );
@@ -59,6 +70,11 @@ class Main extends React.Component {
 // Make everything neat and pretty
 const offset = 24;
 const styles = StyleSheet.create({
+  ButtonStyling: {
+    width: 200,
+    height: 200,
+    marginLeft:10,
+  },
   ImageStyling: {
     marginLeft: 120,
     width: 150,
@@ -71,7 +87,8 @@ const styles = StyleSheet.create({
     // Set hex color code here.
     backgroundColor: '#afceff',
   },
-  nameInput: {
+  inputBox: {
+    borderRadius: '20',
     height: offset * 2,
     margin: offset,
     paddingHorizontal: offset,
@@ -80,10 +97,6 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: offset,
-    marginLeft: offset,
-    fontSize: offset,
-  },
-  buttonText: {
     marginLeft: offset,
     fontSize: offset,
   },
