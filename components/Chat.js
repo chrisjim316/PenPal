@@ -2,15 +2,17 @@ import React from 'react';
 import { GiftedChat } from 'react-native-gifted-chat'; // To make creating the chat
 
 import Fire from '../Fire';
-import {TouchableOpacity, View, Button} from 'react-native';
+import {TouchableOpacity, View, Button, Text, Clipboard} from 'react-native';
 
-var convoStarters = ["What is your favourite sport?",
+let convoStarters = ["What is your favourite sport?",
                      "What is your favourite thing to do in your City",
                      "Would you rather go on a hike or a swim?",
                      "How is the weather in your city?",
                      "What are your hobbies?",
                      "What music do you like?",
                      "What was your childhood dream?"];
+
+var flashcards = [];
 
 type Props = {
   name?: string,
@@ -20,11 +22,42 @@ class Chat extends React.Component<Props> {
   // Set the title of the screen to either the state.params.language or a default welcome message
   static navigationOptions = ({ navigation }) => ({
     title: (navigation.state.params.language + ' Chat') || 'Welcome to PenPal!',
+    headerRight: <TouchableOpacity onPress={() => navigation.navigate("Flashcards", {fc: flashcards})}>
+    <Text>Flashcards</Text></TouchableOpacity>
   });
 
   state = {
     messages: [],
   };
+
+  onLongPress(ctx, currentMessage) {
+    if (currentMessage.text) {
+        const options = [
+          'Add to Flashcards',
+          'Copy Text',
+          'Cancel',
+        ];
+        const cancelButtonIndex = options.length - 1;
+        ctx.actionSheet().showActionSheetWithOptions({
+          options,
+          cancelButtonIndex,
+        },
+        (buttonIndex) => {
+          switch (buttonIndex) {
+            case 0:
+              //Add to flashcards
+              console.log("Adding to flashcards...");
+              flashcards.push(currentMessage.text);
+              break;
+            case 1:
+              Clipboard.setString(currentMessage.text);
+              break;
+
+          }
+        });
+      }
+    }
+
 
   // Chat bubbles!
   get user() {
@@ -40,6 +73,7 @@ class Chat extends React.Component<Props> {
     return (
       <GiftedChat
         messages={this.state.messages}
+        onLongPress={(ctx, currentMessage) => this.onLongPress(ctx, currentMessage)}
         // Reference to Firebase server and user
         onSend={Fire.shared.send}
         user={this.user}
