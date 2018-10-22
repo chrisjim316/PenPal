@@ -50,13 +50,18 @@ class Main extends React.Component {
           value={this.state.name}
         />
 
-        <Text style={styles.title}>Enter you preferred language:(Spanish, English, French, Chinese, Japanese), Arjun make the entire dropdown list and include every country</Text>
-        <TextInput
-          style={styles.inputBox}
-          placeHolder="Spanish"
-          onChangeText={this.onChangeLanguage} // listener
-          value={this.state.language}
-        />
+        <Picker
+          selectedValue={this.state.language}
+          style={{ height: 50, width: 100 }}
+          onValueChange={(itemValue, itemIndex) => this.onChangeLanguage(itemValue)}>
+          <Picker.Item label="Spanish" value="es" />
+          <Picker.Item label="French" value="fr" />
+          <Picker.Item label="English" value="en" />
+          <Picker.Item label="Hindi" value="hi" />
+          <Picker.Item label="Japanese" value="ja" />
+          <Picker.Item label="Chinese" value="zh-CN" />
+        </Picker>
+
 
         // Button to continue to next screen (chat)
         <TouchableOpacity onPress={this.onPress}>
