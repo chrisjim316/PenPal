@@ -2,6 +2,15 @@ import React from 'react';
 import { GiftedChat } from 'react-native-gifted-chat'; // To make creating the chat
 
 import Fire from '../Fire';
+import {TouchableOpacity, View, Button} from 'react-native';
+
+var convoStarters = ["What is your favourite sport?",
+                     "What is your favourite thing to do in your City",
+                     "Would you rather go on a hike or a swim?",
+                     "How is the weather in your city?",
+                     "What are your hobbies?",
+                     "What music do you like?",
+                     "What was your childhood dream?"];
 
 type Props = {
   name?: string,
@@ -34,8 +43,33 @@ class Chat extends React.Component<Props> {
         // Reference to Firebase server and user
         onSend={Fire.shared.send}
         user={this.user}
+        renderActions={this.renderActions.bind(this)}
       />
     );
+  }
+
+  renderActions() {
+    return (
+      <TouchableOpacity>
+        <Button
+         onPress={this.convoStart}
+         title="Start convo"
+         borderRadius='20' backgroundColor="#97C1FF"
+        />
+      </TouchableOpacity>
+    );
+  }
+
+  convoStart()  {
+    let u = {
+      _id: Fire.shared.uid,
+      language: 'en'
+    }
+    let msg = {
+      user: u,
+      text: convoStarters[Math.floor(Math.random() * 7)],
+    };
+    Fire.shared.send([msg]);
   }
 
   // message is the response from on method in Fire.js
@@ -55,5 +89,6 @@ class Chat extends React.Component<Props> {
   }
 
 }
+
 
 export default Chat;
