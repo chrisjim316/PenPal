@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet,
   Text,
+  Picker,
   TextInput,
   TouchableOpacity, // For clicking buttons
 } from 'react-native';
@@ -52,7 +53,7 @@ class Main extends React.Component {
 
         <Picker
           selectedValue={this.state.language}
-          style={{ height: 50, width: 100 }}
+          style={styles.dropdown}
           onValueChange={(itemValue, itemIndex) => this.onChangeLanguage(itemValue)}>
           <Picker.Item label="Spanish" value="es" />
           <Picker.Item label="French" value="fr" />
@@ -75,6 +76,11 @@ class Main extends React.Component {
 // Make everything neat and pretty
 const offset = 24;
 const styles = StyleSheet.create({
+  dropdown: {
+    marginLeft: 10,
+    height: 200,
+    width: 200
+  },
   ButtonStyling: {
     width: 200,
     height: 200,
