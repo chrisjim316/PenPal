@@ -23,6 +23,9 @@ sudo npm install -g expo-cli && sudo npm install
 ```
 expo start
 ```
+
+4.1 If the above command fails for you, just go to https://docs.expo.io/versions/latest/introduction/installation.html, find 'Not working?' under 'iOS Simulator' and follow the instructions to **manually install expo** on your iOS simulator. **Then jump to step 7**. 
+
 5. Click 's' on your keyboard on the command line, click the arrow down key until you are hovering above 'Log in with an existing Expo account' and click enter. Sign in expo using the credentials below
 ```
 Username: chrisjim316
