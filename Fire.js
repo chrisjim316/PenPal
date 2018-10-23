@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import { PowerTranslator, ProviderTypes, TranslatorConfiguration, TranslatorFactory } from 'react-native-power-translator';
-// import translate from 'google-translate-api';
-const API_KEY = 'AIzaSyClnfcFWOuOg_DfiqlY3-Hvb0t7Q3DiIYw'
+const API_KEY = 'AIzaSyClnfcFWOuOg_DfiqlY3-Hvb0t7Q3DiIYw';
 
 class Fire {
 
@@ -54,6 +53,14 @@ class Fire {
     return firebase.database().ref('messages');
   }
 
+  get language() {
+    return firebase.database().ref('language');
+  }
+
+  // get tempText() {
+  //   return firebase.database().ref('tempText');
+  // }
+
   // This takes care of all the messages currently stored in the database
   // Manually changing text for example, will change all text
   parse = snapshot => {
@@ -61,7 +68,21 @@ class Fire {
     const { key: _id } = snapshot;
     const timestamp = new Date(numberStamp);
 
-    let message = {
+    this.language.once('value').then(languageRefData => {
+      console.log("languageRefData is: " + languageRefData.val())
+      TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, languageRefData);
+      const translator = TranslatorFactory.createTranslator();
+
+      // ** CONFIRMED WORKING, DOES TRANSLATE EVERY MESSAGE ON THE FRONT END, BUT NEVER UPDATES CUZ OUT OF SCOPE
+      translator.translate(text).then(translated  => {
+        console.log('[' + text +'] translated to [' + translated + ']');
+        text = translated;
+        // this.updateTempText(translated);
+      });
+    })
+
+    // ** TEXT IS OUT OF SCOPE SO IT IS NEVER UPDATED, NEED A FIX ON THIS
+    const message = {
       _id,
       timestamp,
       text,
@@ -69,6 +90,7 @@ class Fire {
     };
 
     return message;
+    // this.resetTempText();
   }
 
   // Callback prop that calls our messages ref
@@ -89,7 +111,8 @@ class Fire {
     for (let i = 0; i < messages.length; i++) {
       let { text, user } = messages[i];
 
-      console.log("Language is set to " + user.language);
+      this.updateLanguage(user.language);
+      console.log("Language is updated to " + user.language);
       TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, user.language);
 
       const translator = TranslatorFactory.createTranslator();
@@ -109,20 +132,12 @@ class Fire {
     }
   };
 
-  // translateMessage = (message, language) => {
-  //   translate(message, {to: language}).then(res => {
-  //     console.log(res.text);
-  //     //=> I speak English
-  //     console.log(res.from.language.iso);
-  //     //=> nl
-  //     return res.text;
-  //   }).catch(err => {
-  //     console.error(err);
-  //   });
-  // };
-  // let translatedText = this.translateMessage(message.text, language);
-
   append = message => this.ref.push(message);
+  // This makes sure only one language preference is set
+  updateLanguage = languagePreference => this.language.set(languagePreference);
+  // // This makes sure there's only one set of text
+  // updateTempText = textSet => this.tempText.push(textSet);
+  // resetTempText = () => this.tempText.set([]);
 
   // Unsubscribe from the database
   off() {
