@@ -21,7 +21,8 @@ class Main extends React.Component {
   // The component's state, this will be the user's name
   state = {
     name: '',
-    language: ''
+    // Set default language to first choice to prevent null pointer exception
+    language: 'af',
   }
 
   onChangeLanguage = language => this.setState({ language }); // Create listener for language preference selections
