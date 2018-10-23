@@ -1,9 +1,7 @@
 import React from 'react';
-import { GiftedChat } from 'react-native-gifted-chat'; // To make creating the chat
-
 import Fire from '../Fire';
+import { GiftedChat } from 'react-native-gifted-chat'; // To make creating the chat
 import {TouchableOpacity, View, Button, Text, Clipboard} from 'react-native';
-
 let convoStarters = ["What is your favourite sport?",
                      "What is your favourite thing to do in your City",
                      "Would you rather go on a hike or a swim?",
@@ -11,7 +9,6 @@ let convoStarters = ["What is your favourite sport?",
                      "What are your hobbies?",
                      "What music do you like?",
                      "What was your childhood dream?"];
-
 var flashcards = [];
 
 type Props = {
@@ -52,7 +49,6 @@ class Chat extends React.Component<Props> {
             case 1:
               Clipboard.setString(currentMessage.text);
               break;
-
           }
         });
       }
@@ -88,7 +84,8 @@ class Chat extends React.Component<Props> {
         <Button
          onPress={this.convoStart}
          title="Start convo"
-         borderRadius='20' backgroundColor="#97C1FF"
+         borderRadius='20'
+         backgroundColor="#97C1FF"
         />
       </TouchableOpacity>
     );
@@ -121,8 +118,6 @@ class Chat extends React.Component<Props> {
   componentWillUnmount() {
     Fire.shared.off();
   }
-
 }
-
 
 export default Chat;
