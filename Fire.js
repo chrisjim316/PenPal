@@ -2,7 +2,6 @@ import firebase from 'firebase';
 import { PowerTranslator, ProviderTypes, TranslatorConfiguration, TranslatorFactory } from 'react-native-power-translator';
 // import translate from 'google-translate-api';
 const API_KEY = 'AIzaSyClnfcFWOuOg_DfiqlY3-Hvb0t7Q3DiIYw'
-let language = 'fr';
 
 class Fire {
 
@@ -87,33 +86,11 @@ class Fire {
   // This only takes care of the current message being sent
   // Sends the message to the Backend
   send = (messages) => {
-    TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
-
     for (let i = 0; i < messages.length; i++) {
       let { text, user } = messages[i];
 
-      // Sets language based on user sign up language preferences
-      if(user.language.trim() == "Spanish") {
-        language = 'es';
-        console.log("Language has been changed to " + language);
-        TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
-      } else if(user.language.trim() == "English") {
-        language = 'en';
-        console.log("Language has been changed to " + language);
-        TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
-      } else if(user.language.trim() == "French") {
-        language = 'fr';
-        console.log("Language has been changed to " + language);
-        TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
-      } else if(user.language.trim() == "Chinese") {
-        language = 'zh-TW';
-        console.log("Language has been changed to " + language);
-        TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
-      } else if(user.language.trim() == "Japanese") {
-        language = 'ja';
-        console.log("Language has been changed to " + language);
-        TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
-      }
+      console.log("Language is set to " + user.language);
+      TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, user.language);
 
       const translator = TranslatorFactory.createTranslator();
       translator.translate(text).then(translated => {
