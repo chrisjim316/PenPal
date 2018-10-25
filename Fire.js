@@ -91,6 +91,7 @@ class Fire {
   on = (callback, language) =>
     this.ref
       .limitToLast(100)
+      .orderByChild("timestamp") // TODO: this
       .on('child_added', snapshot => this.parse(callback, snapshot, language));
 
   // Get accurate timestamp
