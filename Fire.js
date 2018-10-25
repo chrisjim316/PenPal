@@ -53,52 +53,45 @@ class Fire {
     return firebase.database().ref('messages');
   }
 
-  get language() {
-    return firebase.database().ref('language');
-  }
-
-  // get tempText() {
-  //   return firebase.database().ref('tempText');
-  // }
-
   // This takes care of all the messages currently stored in the database
   // Manually changing text for example, will change all text
-  parse = snapshot => {
+  parse = (callback, snapshot, language) => {
+    // console.log("language is: ", language);
     let { timestamp: numberStamp, text, user } = snapshot.val();
+    // console.log("text is: "+typeof(text));
     const { key: _id } = snapshot;
     const timestamp = new Date(numberStamp);
 
-    this.language.once('value').then(languageRefData => {
-      console.log("languageRefData is: " + languageRefData.val())
-      TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, languageRefData);
-      const translator = TranslatorFactory.createTranslator();
+    TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
+    const translator = TranslatorFactory.createTranslator();
 
-      // ** CONFIRMED WORKING, DOES TRANSLATE EVERY MESSAGE ON THE FRONT END, BUT NEVER UPDATES CUZ OUT OF SCOPE
-      translator.translate(text).then(translated  => {
-        console.log('[' + text +'] translated to [' + translated + ']');
-        text = translated;
-        // this.updateTempText(translated);
+    // ** CONFIRMED WORKING, DOES TRANSLATE EVERY MESSAGE ON THE FRONT END, BUT NEVER UPDATES CUZ OUT OF SCOPE
+    translator.translate(text).then(translated  => {
+      //console.log('[' + text +'] translated to [' + translated + ']');
+      text = translated;
+
+      callback({
+        _id,
+        timestamp,
+        text,
+        user
       });
-    })
+
+      // this.updateTempText(translated);
+    });
 
     // ** TEXT IS OUT OF SCOPE SO IT IS NEVER UPDATED, NEED A FIX ON THIS
-    const message = {
-      _id,
-      timestamp,
-      text,
-      user,
-    };
 
-    return message;
+    // return message;
     // this.resetTempText();
-  }
+  };
 
   // Callback prop that calls our messages ref
   // Subsribes to the database, Gets last 100 messages and subscribes to every new message then parse it
-  on = callback =>
+  on = (callback, language) =>
     this.ref
       .limitToLast(100)
-      .on('child_added', snapshot => callback(this.parse(snapshot)));
+      .on('child_added', snapshot => this.parse(callback, snapshot, language));
 
   // Get accurate timestamp
   get timestamp() {
@@ -111,7 +104,6 @@ class Fire {
     for (let i = 0; i < messages.length; i++) {
       let { text, user } = messages[i];
 
-      this.updateLanguage(user.language);
       console.log("Language is updated to " + user.language);
       TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, user.language);
 

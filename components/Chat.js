@@ -65,7 +65,17 @@ class Chat extends React.Component<Props> {
     };
   }
 
+  componentWillMount() {
+    console.log("translating message");
+    Fire.shared.on((message) => {
+      this.setState({
+        messages: [...this.state.messages, message]
+      })
+    }, this.props.navigation.state.params.language);
+  }
+
   render() {
+    // this.translateMessages();
     return (
       <GiftedChat
         messages={this.state.messages}
@@ -101,17 +111,6 @@ class Chat extends React.Component<Props> {
       text: convoStarters[Math.floor(Math.random() * 7)],
     };
     Fire.shared.send([msg]);
-  }
-
-  // message is the response from on method in Fire.js
-  // Connects to Firebase server and script
-  // Subscribe
-  componentDidMount() {
-    Fire.shared.on(message =>
-      this.setState(previousState => ({
-        messages: GiftedChat.append(previousState.messages, message),
-      })),
-    );
   }
 
   // Unsubscribe
