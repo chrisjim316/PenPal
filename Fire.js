@@ -65,9 +65,7 @@ class Fire {
     TranslatorConfiguration.setConfig(ProviderTypes.Google, API_KEY, language);
     const translator = TranslatorFactory.createTranslator();
 
-    // ** CONFIRMED WORKING, DOES TRANSLATE EVERY MESSAGE ON THE FRONT END, BUT NEVER UPDATES CUZ OUT OF SCOPE
     translator.translate(text).then(translated  => {
-      //console.log('[' + text +'] translated to [' + translated + ']');
       text = translated;
 
       callback({
@@ -76,14 +74,7 @@ class Fire {
         text,
         user
       });
-
-      // this.updateTempText(translated);
     });
-
-    // ** TEXT IS OUT OF SCOPE SO IT IS NEVER UPDATED, NEED A FIX ON THIS
-
-    // return message;
-    // this.resetTempText();
   };
 
   // Callback prop that calls our messages ref
@@ -91,10 +82,9 @@ class Fire {
   on = (callback, language) =>
     this.ref
       .limitToLast(100)
-      .orderByChild("timestamp") // TODO: this
+      .orderByChild("/timestamp")
       .on('child_added', snapshot => this.parse(callback, snapshot, language));
 
-  // Get accurate timestamp
   get timestamp() {
     return firebase.database.ServerValue.TIMESTAMP;
   }
@@ -128,9 +118,6 @@ class Fire {
   append = message => this.ref.push(message);
   // This makes sure only one language preference is set
   updateLanguage = languagePreference => this.language.set(languagePreference);
-  // // This makes sure there's only one set of text
-  // updateTempText = textSet => this.tempText.push(textSet);
-  // resetTempText = () => this.tempText.set([]);
 
   // Unsubscribe from the database
   off() {
