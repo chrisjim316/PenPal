@@ -69,7 +69,16 @@ class Chat extends React.Component<Props> {
     console.log("translating message");
     Fire.shared.on((message) => {
       this.setState({
-        messages: [...this.state.messages, message]
+        messages: [message, ...this.state.messages].sort((a, b) => {
+          if (a.timestamp > b.timestamp) {
+            return -1;
+          }
+          if (a.timestamp < b.timestamp) {
+            return 1;
+          }
+          // a must be equal to b
+          return 0;
+        })
       })
     }, this.props.navigation.state.params.language);
   }
@@ -92,7 +101,7 @@ class Chat extends React.Component<Props> {
     return (
       <TouchableOpacity>
         <Button
-         onPress={this.convoStart}
+         onPress={this.convoStart.bind(this)}
          title="Start convo"
          borderRadius='20'
          backgroundColor="#97C1FF"
@@ -110,6 +119,7 @@ class Chat extends React.Component<Props> {
       user: u,
       text: convoStarters[Math.floor(Math.random() * 7)],
     };
+    console.log("setting state to", msg);
     Fire.shared.send([msg]);
   }
 

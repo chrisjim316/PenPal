@@ -81,8 +81,8 @@ class Fire {
   // Subsribes to the database, Gets last 100 messages and subscribes to every new message then parse it
   on = (callback, language) =>
     this.ref
-      .limitToLast(100)
-      .orderByChild("/timestamp")
+      .orderByChild('timestamp')
+      // .limitToFirst(100)
       .on('child_added', snapshot => this.parse(callback, snapshot, language));
 
   get timestamp() {
