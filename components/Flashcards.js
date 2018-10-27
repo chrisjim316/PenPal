@@ -38,7 +38,7 @@ class Flashcards extends React.Component {
 
         //<Text style={styles.flash}>{textInputComponents}</Text>
         { flashcards.map((item, key)=>(
-         <Text key={key} style={styles.titleText}> { item } </Text>)
+         <Text key={key} style={styles.flash}> { item } </Text>)
          )}
 
       </View>
@@ -57,13 +57,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#afceff',
   },
   titleText: {
-    marginTop: 10,
+    marginTop: offset,
     marginLeft: offset,
     fontSize: offset,
   },
   flash: {
     fontSize: 20,
+    marginTop: 10,
     marginLeft: offset,
+    marginRight: offset,
+    borderColor: 'white',
+    borderWidth: 4,
+    backgroundColor: 'white',
   },
 });
 
