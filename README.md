@@ -1,4 +1,4 @@
-# **PenPal** 🌇
+# **PenPal** 🌇 - 2nd Place Winner
 ### A translation app that connects communities together by making learning new languages meaningful with flashcards and conversation starters, built using `REACT NATIVE`, `NODEJS` & `FIREBASE`
 ### [LIVE DEMO](https://snack.expo.io/@chrisjim316/penpal) 📱 - [LICENSE](https://github.com/chrisjim316/PenPal/blob/master/LICENSE) 📝
 
