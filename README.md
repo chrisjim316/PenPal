@@ -2,8 +2,10 @@
 ### A translation app that connects communities together by making learning new languages meaningful with flashcards and conversation starters, built using `REACT NATIVE`, `NODEJS` & `FIREBASE`
 ### [LIVE DEMO](https://snack.expo.io/@chrisjim316/penpal) 📱 - [LICENSE](https://github.com/chrisjim316/PenPal/blob/master/LICENSE) 📝
 
-![en_Chat](assets/en_Chat.png?raw=true)
-![zh_tw_Chat](assets/zh_tw_Chat.png?raw=true)
+## App demo examples
+en_Chat                    |  zh_tw_Chat
+:-------------------------:|:-------------------------:
+<img src="assets/en_Chat.png" height="50%">  |  <img src="assets/zh_tw_Chat.png" height="50%">
 
 ## Notes
 * Works on both android and ios, but for simplicity just run it on ios
